@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal: #151412;
+  --color-charcoal-2: #1d1b18;
+  --color-charcoal-3: #292622;
+  --color-walnut: #3b2616;
+  --color-walnut-2: #6b4628;
+  --color-wood: #b98a5b;
+  --color-wood-light: #d9b98f;
+  --color-gold: #b8995a;
+  --color-gold-soft: #d8c292;
+  --color-ivory: #f6f1e7;
+  --color-cream: #efe6d4;
+  --color-ink: #1d1a16;
+  --color-muted: #6f665a;
+  --color-mist: #a79e90;
+
+  --font-display: "Cormorant Garamond", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --animate-ken-burns: ken-burns 22s ease-out forwards;
+}
+
+@keyframes ken-burns {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    line-height: 1.05;
+  }
+
+  ::selection {
+    background: var(--color-gold);
+    color: var(--color-charcoal);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* Scroll reveal: content is visible by default; animates in only when JS observes it */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Thin gold hairline used as a section divider */
+.hairline {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+/* Grain-free, low-contrast wood-tone panel for editorial areas */
+.walnut-panel {
+  background:
+    radial-gradient(120% 90% at 100% 0%, rgba(185, 138, 91, 0.18), transparent 60%),
+    linear-gradient(160deg, #3b2616 0%, #241710 100%);
+}
+
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gold) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .animate-ken-burns {
+    animation: none;
+  }
+}
